@@ -17,7 +17,7 @@ if ($step == 2 && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $conn->exec("CREATE DATABASE IF NOT EXISTS `$name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 
-        $conn->exec("USE `$name` text"); // Just to check if we can use it
+        $conn->exec("USE `$name` "); // Just to check if we can use it
 
         // Read SQL file
         $sql = file_get_contents('../database.sql');
@@ -25,11 +25,12 @@ if ($step == 2 && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Create Admin Account
         $admin_pass = password_hash($_POST['admin_pass'], PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO users (role_id, username, email, password, full_name, status) VALUES (1, :user, :email, :pass, 'Super Admin', 'active')");
+        $stmt = $conn->prepare("INSERT INTO users (role_id, username, email, password, full_name, status) VALUES (1, :user, :email, :pass, :fullname, 'active')");
         $stmt->execute([
             ':user' => $_POST['admin_user'],
             ':email' => $_POST['admin_email'],
-            ':pass' => $admin_pass
+            ':pass' => $admin_pass,
+            ':fullname' => 'Super Admin'
         ]);
 
         // Write config file
