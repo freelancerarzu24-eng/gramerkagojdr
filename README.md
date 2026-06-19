@@ -25,8 +25,22 @@ This is a professional custom News Portal Website built with PHP 8.3+ and MySQL.
 - Password Hashing with `password_hash()`.
 - XSS prevention via `htmlspecialchars()`.
 
-## Admin Panel
+## Admin Panel & Login Guide
 Access the dashboard at `http://your-domain.com/admin/`.
+
+### How to Login:
+1. **Via Installation Wizard:**
+   - During the installation process at `http://your-domain.com/install/`, you will be asked to create a Super Admin account.
+   - Use those credentials to log in at the `/admin/` URL.
+
+2. **Via Sample Data Seeder (Development only):**
+   - If you ran `php seeder.php`, the default credentials are:
+     - **Username:** `admin`
+     - **Password:** `admin123`
+   - *Note: Please change these credentials immediately after logging in for security.*
+
+3. **Session Security:**
+   - The admin panel uses secure sessions and CSRF protection. If your session expires, you will be redirected to the login page.
 
 ## Features
 - Multi-language support (English/Bangla).
